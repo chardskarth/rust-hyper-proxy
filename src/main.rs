@@ -1,6 +1,3 @@
-// use httpmock::prelude::*;
-// use serde_json::{json, Value};
-
 use std::{convert::Infallible, net::SocketAddr};
 
 use http_body_util::Full;
@@ -51,40 +48,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             }
         });
     }
-
-    //
-    // let server = MockServer::start();
-    //
-    // let m = server.mock(|when, then| {
-    //     when.method(POST)
-    //         .path("/users")
-    //         .header("content-type", "application/json")
-    //         .json_body(json!({ "name": "Fred" }));
-    //     then.status(201)
-    //         .header("content-type", "application/json")
-    //         .json_body(json!({ "name": "Hans" }));
-    // });
 }
 
 async fn handle_request(req: Request<Incoming>) -> Result<Response<Full<Bytes>>, Infallible> {
     println!("Received a request: {:#?}", req);
-
-
-    // let proxy = {
-    //     let proxy_uri = "http://my-proxy:8080".parse().unwrap();
-    //     let proxy = Proxy::new(Intercept::All, proxy_uri);
-    //     //proxy.set_authorization(Authorization::basic("John Doe", "Agent1234"));
-    //     let connector = HttpConnector::new();
-    //     let proxy_connector = ProxyConnector::from_proxy(connector, proxy).unwrap();
-    //     proxy_connector
-    // };
-    
-    // let client: Client<HttpConnector, TokioExecutor> = Client::builder(TokioExecutor::new())
-    //     .http1_title_case_headers(true)
-    //     .http1_preserve_header_case(true)
-    //     .build_http();
-
-
 
     match (req.method(), req.uri().path()) {
         (&Method::GET, "/") => {
