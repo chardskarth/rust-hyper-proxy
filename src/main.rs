@@ -29,7 +29,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let proxy_io = TokioIo::new(proxy_stream);
 
 
-    let anyyow = ClientBuilder::new().handshake(proxy_io).await;
+    let (mut proxy_client, client_connection) = ClientBuilder::new().handshake(proxy_io).await?;
 
     loop {
 
